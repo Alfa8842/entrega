@@ -1,0 +1,31 @@
+package com.alfaairlines.models;
+
+public class PacoteModel {
+	
+	private String id;
+	private Double preco;
+	private String destino;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public Double getPreco() {
+		return preco;
+	}
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+	public String getDestino() {
+		return destino;
+	}
+	public void setDestino(String destino) {
+		this.destino = destino;
+	}
+	
+	
+	
+
+}

@@ -1,0 +1,5 @@
+package com.alfaairlines.repositories;
+
+public interface IPacoteRepository {
+
+}

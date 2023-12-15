@@ -1,0 +1,74 @@
+package com.alfaairlines.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.alfaairlines.models.PacoteModel;
+import com.alfaairlines.models.UserModel;
+import com.alfaairlines.repositories.IPacoteRepository;
+import com.alfaairlines.repositories.IUserRepository;
+
+@Service
+public class UserService {
+	private final IUserRepository userRepositories;
+	private final IPacoteRepository pacoteRepositories;
+	public UserService(IUserRepository userRepositories,IPacoteRepository pacoteRepositories) {
+		this.userRepositories = userRepositories;
+		this.pacoteRepositories = pacoteRepositories;
+	}
+
+	public UserModel createUser(UserModel user) { //metodo para criar um usuario, vai receber um usuario
+		if (user == null) {
+			throw new IllegalArgumentException("Usuario não existente!");
+		}
+		return userRepositories.save(user);
+	}
+	
+	public List<UserModel> listUsers(){
+		return userRepositories.findAll();
+	}
+	public UserModel updateUser(UserModel userUpdated) {
+		if (userUpdated == null || userUpdated.getId() == null) {
+			throw new IllegalArgumentException("Usuario ou id não encontrado");
+		}
+		Optional<UserModel> existingUser = userRepositories.findById(userUpdated.getId());
+		
+		if (existingUser.isEmpty()) {
+			throw new IllegalArgumentException("Usuario ou id não encontrado");
+		}
+		return userRepositories.save(userUpdated);
+	}
+	
+	public void delete(String id) {
+		if(id == null) {
+			throw new IllegalArgumentException("Id não encontrado!");
+		}
+		userRepositories.deleteById(id);
+	}
+	public UserModel byPacotes (String idUsuario, String idPacote) {
+		try {
+			Optional<UserModel> existingUser = userRepositories.findById(idUsuario);
+			Optional<PacoteModel> existingPacote = pacoteRepositories.findById(idPacote);
+			if (existingUser.isPresent() && existingPacote.isPresent() ) {
+				UserModel userExisting = existingUser.get();
+				PacoteModel pacoteExisting = existingPacote.get();
+				userExisting.addPacote(pacoteExisting);
+				return userRepositories.save(userExisting);
+				
+			}
+			else {
+				throw new IllegalArgumentException("Id ou pacote não encontrado!");
+			}
+		}catch(IllegalArgumentException e){
+			throw e;
+		}catch(Exception e) {
+			throw new RuntimeException("Erro ao fazer a compra",e);
+			
+		
+		}
+		
+	}
+
+}

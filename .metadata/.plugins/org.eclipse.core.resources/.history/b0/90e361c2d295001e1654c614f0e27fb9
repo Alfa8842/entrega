@@ -1,0 +1,12 @@
+package com.alfaairlines.services;
+
+import com.alfaairlines.models.PacoteModel;
+
+public class IPacoteRepositories {
+
+	public PacoteModel save(PacoteModel pacote) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,21 @@
+package com.alfaairlines.services;
+
+import org.springframework.stereotype.Service;
+
+import com.alfaairlines.models.UserModel;
+
+@Service
+public class UserService {
+	private final IUserRepository userRepositories;
+	
+	public UserService(IUserRepository userRepositories) {
+		this.userRepositories = userRepositories;
+	}
+
+	public UserModel createUser(UserModel user) { //metodo para criar um usuario, vai receber um usuario
+		if (user == null) {
+			throw new IllegalArgumentException(s:"Usuario não existente!");
+		}
+		return userRepository.save(user);
+	}
+}
