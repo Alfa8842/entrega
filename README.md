@@ -1,4 +1,4 @@
-# Projeto AlfaAirlines - Sistema de Agência de Viagens com Spring
+# Projeto AlfaAirlines - Agência de Viagens com Spring
 
 Este projeto é a refatoração da aplicação web AlfaAirlines, utilizando o ecossistema Spring Framework para o back-end, com Java Spring Boot, Spring MVC, e persistência de dados utilizando Spring Data JPA. O banco de dados escolhido é o MongoDB para atender às especificações do projeto.
 
